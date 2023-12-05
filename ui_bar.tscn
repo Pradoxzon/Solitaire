@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://dexgfpust6fk2"]
+
+[ext_resource type="Script" path="res://ui_bar.gd" id="1_cfbgy"]
+
+[node name="UiBar" type="Node"]
+script = ExtResource("1_cfbgy")
+
+[node name="UiBackground" type="ColorRect" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 125.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 0.705882)
+
+[node name="NewGameButton" type="Button" parent="."]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 420.0
+offset_bottom = 123.0
+grow_vertical = 0
+focus_mode = 0
+theme_override_font_sizes/font_size = 76
+text = "New Game"
+flat = true
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -143.5
+offset_top = 10.0
+offset_right = 143.5
+offset_bottom = 118.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 76
+text = "Score: 0"
+metadata/_edit_use_anchors_ = true
+
+[node name="TimeLabel" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 118.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 76
+text = "0:00"
+
+[connection signal="pressed" from="NewGameButton" to="." method="_on_new_game_button_pressed"]

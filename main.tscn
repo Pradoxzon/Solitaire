@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://dm2p853agkpxh"]
+
+[ext_resource type="PackedScene" uid="uid://cgbhehwpcxcfx" path="res://deck.tscn" id="1_3v3g4"]
+[ext_resource type="Script" path="res://main.gd" id="1_b7o8u"]
+[ext_resource type="PackedScene" uid="uid://dexgfpust6fk2" path="res://ui_bar.tscn" id="3_o11lh"]
+[ext_resource type="PackedScene" uid="uid://joompju3oahk" path="res://stock.tscn" id="4_2bqdw"]
+[ext_resource type="PackedScene" uid="uid://bg7gduiapdtct" path="res://talon.tscn" id="5_mx2y0"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_b7o8u")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.192157, 0.45098, 0.176471, 1)
+
+[node name="StockPile" parent="." instance=ExtResource("4_2bqdw")]
+position = Vector2(1770, 245)
+
+[node name="TalonPile" parent="." instance=ExtResource("5_mx2y0")]
+position = Vector2(1609, 243)
+
+[node name="Deck" parent="." instance=ExtResource("1_3v3g4")]
+
+[node name="UiBar" parent="." instance=ExtResource("3_o11lh")]
+
+[node name="Title" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.5
+offset_top = -13.0
+offset_right = 34.5
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 110
+text = "Solitaire!
+Hit 'New Game'"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="stock_clicked" from="StockPile" to="." method="_on_stock_pile_clicked"]
+[connection signal="talon_clicked" from="TalonPile" to="." method="_on_talon_pile_clicked"]
+[connection signal="card_clicked" from="Deck" to="." method="_on_deck_card_clicked"]
+[connection signal="new_game" from="UiBar" to="." method="_on_new_game"]

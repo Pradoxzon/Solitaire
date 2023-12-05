@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bg7gduiapdtct"]
+
+[ext_resource type="Texture2D" uid="uid://bcuf1lj8j5f0q" path="res://Art/CardOutline.png" id="1_dybtu"]
+[ext_resource type="Script" path="res://talon.gd" id="1_mm76m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mfigh"]
+size = Vector2(25.2, 35.2)
+
+[node name="Talon" type="Area2D"]
+scale = Vector2(5, 5)
+script = ExtResource("1_mm76m")
+
+[node name="CardOutline" type="Sprite2D" parent="."]
+texture = ExtResource("1_dybtu")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(-1.90735e-07, 7.86781e-07)
+shape = SubResource("RectangleShape2D_mfigh")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
