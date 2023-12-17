@@ -12,10 +12,14 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
+func reset_cards() -> void:
+	cards.clear()
+
+
 func add_cards(cards_to_add: Array[Card]) -> void:
 #	print("Stock :: Adding ", cards_to_add.size(), " cards to pile.")
 	for card in cards_to_add:
-		card.position = self.position
+		card.position = get_global_pos()
 		card.visible = true
 		if card.showing_front:
 			card.flip()
@@ -27,10 +31,14 @@ func is_empty() -> bool:
 
 
 func draw(amount: int = 1) -> Array[Card]:
-	var drawn_cards: Array[Card]
+	var drawn_cards: Array[Card] = []
 	for i in range(min(amount, cards.size())):
 		drawn_cards.append(cards.pop_front())
 	return drawn_cards
+
+
+func get_global_pos() -> Vector2:
+	return get_parent().position + self.position
 
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:

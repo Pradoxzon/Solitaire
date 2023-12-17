@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvadsgt3p5rtu"]
+
+[ext_resource type="Texture2D" uid="uid://bcuf1lj8j5f0q" path="res://Art/CardOutline.png" id="1_s5skg"]
+[ext_resource type="Script" path="res://tableau_pile.gd" id="1_uiijh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fdgy"]
+size = Vector2(25.2, 35.2)
+
+[node name="TableauPile" type="Area2D"]
+scale = Vector2(5, 5)
+script = ExtResource("1_uiijh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_s5skg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.90735e-07, 2.28882e-06)
+shape = SubResource("RectangleShape2D_7fdgy")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

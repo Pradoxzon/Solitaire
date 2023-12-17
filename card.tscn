@@ -21,4 +21,21 @@ texture = ExtResource("1_2lcis")
 position = Vector2(-1.90735e-07, 2.28882e-06)
 shape = SubResource("RectangleShape2D_qdyao")
 
-[connection signal="input_event" from="." to="." method="_on_input_event"]
+[node name="SelectedIndicator" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -13.0
+offset_top = -18.0
+offset_right = 13.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+color = Color(0.803922, 0.909804, 0.529412, 0.415686)
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

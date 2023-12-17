@@ -1,13 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://dm2p853agkpxh"]
+[gd_scene load_steps=8 format=3 uid="uid://dm2p853agkpxh"]
 
 [ext_resource type="PackedScene" uid="uid://cgbhehwpcxcfx" path="res://deck.tscn" id="1_3v3g4"]
 [ext_resource type="Script" path="res://main.gd" id="1_b7o8u"]
 [ext_resource type="PackedScene" uid="uid://dexgfpust6fk2" path="res://ui_bar.tscn" id="3_o11lh"]
 [ext_resource type="PackedScene" uid="uid://joompju3oahk" path="res://stock.tscn" id="4_2bqdw"]
+[ext_resource type="PackedScene" uid="uid://bvadsgt3p5rtu" path="res://tableau_pile.tscn" id="5_a88v5"]
 [ext_resource type="PackedScene" uid="uid://bg7gduiapdtct" path="res://talon.tscn" id="5_mx2y0"]
+[ext_resource type="PackedScene" uid="uid://c4n7gt55mkvrv" path="res://foundation.tscn" id="6_rvnja"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" node_paths=PackedStringArray("stock_pile", "talon_pile", "foundations", "tableau_piles")]
 script = ExtResource("1_b7o8u")
+stock_pile = NodePath("Piles/StockPile")
+talon_pile = NodePath("Piles/TalonPile")
+foundations = [NodePath("Foundations/Foundation0"), NodePath("Foundations/Foundation1"), NodePath("Foundations/Foundation2"), NodePath("Foundations/Foundation3")]
+tableau_piles = [NodePath("Tableau/TableauPile0"), NodePath("Tableau/TableauPile1"), NodePath("Tableau/TableauPile2"), NodePath("Tableau/TableauPile3"), NodePath("Tableau/TableauPile4"), NodePath("Tableau/TableauPile5"), NodePath("Tableau/TableauPile6")]
 
 [node name="Background" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -18,11 +24,50 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.192157, 0.45098, 0.176471, 1)
 
-[node name="StockPile" parent="." instance=ExtResource("4_2bqdw")]
-position = Vector2(1770, 245)
+[node name="Piles" type="Node2D" parent="."]
+position = Vector2(1770, 240)
 
-[node name="TalonPile" parent="." instance=ExtResource("5_mx2y0")]
-position = Vector2(1609, 243)
+[node name="StockPile" parent="Piles" instance=ExtResource("4_2bqdw")]
+
+[node name="TalonPile" parent="Piles" instance=ExtResource("5_mx2y0")]
+position = Vector2(-200, 0)
+
+[node name="Foundations" type="Node2D" parent="."]
+position = Vector2(150, 240)
+
+[node name="Foundation0" parent="Foundations" instance=ExtResource("6_rvnja")]
+
+[node name="Foundation1" parent="Foundations" instance=ExtResource("6_rvnja")]
+position = Vector2(200, 0)
+
+[node name="Foundation2" parent="Foundations" instance=ExtResource("6_rvnja")]
+position = Vector2(400, 0)
+
+[node name="Foundation3" parent="Foundations" instance=ExtResource("6_rvnja")]
+position = Vector2(600, 0)
+
+[node name="Tableau" type="Node2D" parent="."]
+position = Vector2(150, 480)
+
+[node name="TableauPile0" parent="Tableau" instance=ExtResource("5_a88v5")]
+
+[node name="TableauPile1" parent="Tableau" instance=ExtResource("5_a88v5")]
+position = Vector2(200, 0)
+
+[node name="TableauPile2" parent="Tableau" instance=ExtResource("5_a88v5")]
+position = Vector2(400, 0)
+
+[node name="TableauPile3" parent="Tableau" instance=ExtResource("5_a88v5")]
+position = Vector2(600, 0)
+
+[node name="TableauPile4" parent="Tableau" instance=ExtResource("5_a88v5")]
+position = Vector2(800, 0)
+
+[node name="TableauPile5" parent="Tableau" instance=ExtResource("5_a88v5")]
+position = Vector2(1000, 0)
+
+[node name="TableauPile6" parent="Tableau" instance=ExtResource("5_a88v5")]
+position = Vector2(1200, 0)
 
 [node name="Deck" parent="." instance=ExtResource("1_3v3g4")]
 
@@ -46,7 +91,17 @@ Hit 'New Game'"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="stock_clicked" from="StockPile" to="." method="_on_stock_pile_clicked"]
-[connection signal="talon_clicked" from="TalonPile" to="." method="_on_talon_pile_clicked"]
-[connection signal="card_clicked" from="Deck" to="." method="_on_deck_card_clicked"]
+[connection signal="stock_clicked" from="Piles/StockPile" to="." method="_on_stock_pile_clicked"]
+[connection signal="talon_clicked" from="Piles/TalonPile" to="." method="_on_talon_pile_clicked"]
+[connection signal="foundation_clicked" from="Foundations/Foundation0" to="." method="_on_foundation_clicked"]
+[connection signal="foundation_clicked" from="Foundations/Foundation1" to="." method="_on_foundation_clicked"]
+[connection signal="foundation_clicked" from="Foundations/Foundation2" to="." method="_on_foundation_clicked"]
+[connection signal="foundation_clicked" from="Foundations/Foundation3" to="." method="_on_foundation_clicked"]
+[connection signal="tableau_pile_clicked" from="Tableau/TableauPile0" to="." method="_on_tableau_pile_clicked"]
+[connection signal="tableau_pile_clicked" from="Tableau/TableauPile1" to="." method="_on_tableau_pile_clicked"]
+[connection signal="tableau_pile_clicked" from="Tableau/TableauPile2" to="." method="_on_tableau_pile_clicked"]
+[connection signal="tableau_pile_clicked" from="Tableau/TableauPile3" to="." method="_on_tableau_pile_clicked"]
+[connection signal="tableau_pile_clicked" from="Tableau/TableauPile4" to="." method="_on_tableau_pile_clicked"]
+[connection signal="tableau_pile_clicked" from="Tableau/TableauPile5" to="." method="_on_tableau_pile_clicked"]
+[connection signal="tableau_pile_clicked" from="Tableau/TableauPile6" to="." method="_on_tableau_pile_clicked"]
 [connection signal="new_game" from="UiBar" to="." method="_on_new_game"]

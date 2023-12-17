@@ -22,7 +22,7 @@ func setup_cards(num_decks: int = 1) -> void:
 func create_cards() -> void:
 	for suite in CardSuites.Suites:
 		for card_num in CardSuites.CardNums:
-			var card = card_node.instantiate()
+			var card: Card = card_node.instantiate()
 			card.suite = suite
 			card.card_num = card_num
 			card.connect("card_clicked", _on_card_clicked)
@@ -42,7 +42,7 @@ func show_cards() -> void:
 func shuffle() -> Array[Card]:
 	randomize()
 	var all_card_nodes = get_tree().get_nodes_in_group("cards")
-	var all_cards: Array[Card]
+	var all_cards: Array[Card] = []
 	for node in all_card_nodes:
 		all_cards.append(node.get_card())
 	all_cards.shuffle()
@@ -53,19 +53,24 @@ func reset_cards() -> void:
 	get_tree().call_group("cards", "reset_card")
 
 
-func display() -> void:
-	var x = 100
-	var y = 100
-	var row_count = 0
-	for card in shuffle():
-		card.position = Vector2(x, y)
-		x += 150
-		row_count += 1
-		if row_count >= 13:
-			x = 100
-			y += 200
-			row_count = 0
+func display_on_top(card: Card) -> void:
+	remove_child(card)
+	add_child(card)
 
 
-func _on_card_clicked(card) -> void:
+#func display() -> void:
+#	var x = 100
+#	var y = 100
+#	var row_count = 0
+#	for card in shuffle():
+#		card.position = Vector2(x, y)
+#		x += 150
+#		row_count += 1
+#		if row_count >= 13:
+#			x = 100
+#			y += 200
+#			row_count = 0
+
+
+func _on_card_clicked(card: Card) -> void:
 	card_clicked.emit(card)
